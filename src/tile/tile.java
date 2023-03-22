@@ -1,0 +1,10 @@
+package tile;
+
+import java.awt.image.BufferedImage;
+
+public class tile {
+
+	public BufferedImage image;
+	public boolean collision = false;
+	public boolean Tp = false;
+}
