@@ -31,7 +31,7 @@ public class TileManager {
 	public void getTileImage() {
 		try {
 			tile[0] = new tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass2.png"));
+			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass2.png"));
 			
 			tile[1] = new tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
@@ -47,7 +47,7 @@ public class TileManager {
 			
 			
 			tile[4] = new tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree.png"));
+			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
 			//tile[4].collision = true;
 			tile[4].Tp = true;
 			
@@ -100,7 +100,7 @@ public class TileManager {
 			}
 			br.close();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	public void draw(Graphics g2) {

@@ -27,7 +27,7 @@ public class GameFanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 60;
 	public final int maxWorldWidth = tileSize * maxScreenCol;
 	public final int maxWorldHeight = tileSize * maxScreenRow;
-	public String Map = "/maps/map02.txt";
+	public String Map = "/Maps/map02.txt";
 	
 	
 	//Fps
