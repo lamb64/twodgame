@@ -100,7 +100,7 @@ public class TileManager {
 			}
 			br.close();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	public void draw(Graphics g2) {
