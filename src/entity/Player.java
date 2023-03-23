@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class Player extends Entity{
 		solidArea.y = 16;
 		solidArea.width = 32;
 		solidArea.height = 32;
-		floorHeight = gp.tileSize * 21 + 48;
+		floorHeight = gp.tileSize * 21;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -130,22 +131,45 @@ public class Player extends Entity{
 						
 					break;
 				case "left":
-					worldX -= speed;
-					break;
+					if(keyH.spacePressed == true) {
+						
+					}
+					else {
+						worldX -= speed;
+						break;
+					}
+					
 					
 				case "right":
-					worldX += speed;
-					break;
+					if(keyH.spacePressed == true) {
+						
+					}
+					else {
+						worldX += speed;
+						break;
+					}
+					
 					
 				case "space":
 					if (worldY <= floorHeight) {
 						jumpStrength -= weight;
 						worldY -= jumpStrength;
+						System.out.println(keyH.spacePressed);
+						if(jumpStrength < 0 && worldY >= gp.tileSize * 21 ) {
+							keyH.spacePressed = false;
+							jumpStrength = 50;
+							worldY = gp.tileSize * 21;
+							System.out.println(keyH.spacePressed);
+						}
 					}
-					else
-						worldY = gp.tileSize * 21;
+					
+					
+										
+						
 					
 				}
+			if (worldY >= floorHeight)
+						worldY = floorHeight;
 			
 			if (TpOn == false )
 				switch(direction) {
@@ -232,6 +256,7 @@ public class Player extends Entity{
 			if(spriteNum == 2) {
 				image = right2;
 			}
+		
 			
 			break;
 		

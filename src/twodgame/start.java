@@ -13,40 +13,17 @@ public class start {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.setTitle("2d game");
-		
+
 		GameFanel GameFanel = new GameFanel();
 		window.add(GameFanel);
-		
+
 		window.pack();
-		
-		
+
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
+
 		GameFanel.startGameThread();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 }
