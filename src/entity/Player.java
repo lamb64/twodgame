@@ -18,6 +18,8 @@ public class Player extends Entity{
 	KeyHandler keyH;
 	public final int screenX;
 	public final int screenY;
+	public int timed = 0;
+	
 	
 	public Player(GameFanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -31,6 +33,7 @@ public class Player extends Entity{
 		solidArea.y = 16;
 		solidArea.width = 32;
 		solidArea.height = 32;
+		floorHeight = gp.tileSize * 21 + 48;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -39,7 +42,10 @@ public class Player extends Entity{
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
 		speed = 4;
+		jumpStrength = 50;
 		direction = "down";
+		weight = 3;
+		
 	}
 	public void getPlayerImage() {
 		try {
@@ -63,12 +69,19 @@ public class Player extends Entity{
 	
 	public void update() {
 		
-		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+		while (GravityOn == true && timed == 0) {
+			worldX = gp.tileSize * 23;
+			worldY = gp.tileSize * 21;
+			timed ++;
 			
-			if(keyH.upPressed == true) {
+		}
+			
+		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.spacePressed == true) {
+			
+			if(keyH.upPressed == true  && GravityOn == false) {
 				direction = "up";				
 			}
-			else if(keyH.downPressed == true) {
+			else if(keyH.downPressed == true && GravityOn == false) {
 				direction = "down";				
 			}
 			else if(keyH.leftPressed == true) {
@@ -77,6 +90,14 @@ public class Player extends Entity{
 			else if(keyH.rightPressed == true) {
 				direction = "right";				
 			}
+			else if (keyH.spacePressed == true) {
+				direction = "space";
+			}
+			else
+				direction = "N/A";
+				
+				
+				
 			//Check Tile Collision
 			CollisionOn = false;
 			gp.cChecker.checkTile(this);
@@ -85,36 +106,60 @@ public class Player extends Entity{
 			gp.tpChecker.checkTile(this);
 			
 			
-			//if collision is false, can move\
+			//if collision is false, can move
 			if (CollisionOn == false )
 				switch(direction) {
 				case "up":
-					worldY -= speed;
+					if(GravityOn == false) {
+						worldY -= speed;
+					}
+					else {
+						
+						//figuring out gravity
+//						for(int x = 0; x > 5; x++)
+//							worldY -= speed;
+//						for(int x = 5; x > 0; x--)
+//							worldY -= speed;
+					}
+						
 					break;
 				case "down":
-					worldY += speed;
+					if(GravityOn == false) {
+						worldY += speed;
+					}
+						
 					break;
 				case "left":
 					worldX -= speed;
 					break;
+					
 				case "right":
 					worldX += speed;
 					break;
+					
+				case "space":
+					if (worldY <= floorHeight) {
+						jumpStrength -= weight;
+						worldY -= jumpStrength;
+					}
+					else
+						worldY = gp.tileSize * 21;
+					
 				}
 			
 			if (TpOn == false )
 				switch(direction) {
 				case "up":
-					gp.Map = "/maps/map03.txt";
+					gp.Map = "/maps/map04.txt";
 					break;
 				case "down":
-					gp.Map = "/maps/map03.txt";
+					gp.Map = "/maps/map04.txt";
 					break;
 				case "left":
-					gp.Map = "/maps/map03.txt";
+					gp.Map = "/maps/map04.txt";
 					break;
 				case "right":
-					gp.Map = "/maps/map03.txt";
+					gp.Map = "/maps/map04.txt";
 					break;
 				}
 			
@@ -142,22 +187,34 @@ public class Player extends Entity{
 		
 		//the game of the image
 		BufferedImage image = null;
+		if (GravityOn == true) {
+			image = down1;		
+		}
 		
 		switch(direction) {
 		case "up":
-			if(spriteNum == 1) {
-				image = up1;
-			}
-			if(spriteNum == 2) {
-				image = up2;
+			if(GravityOn == false) {
+				if(spriteNum == 1) {
+					image = up1;
+				}
+				if(spriteNum == 2) {
+					image = up2;
+				}
 			}
 			break;
 		case "down":
-			if(spriteNum == 1) {
-				image = down1;
-			}
-			if(spriteNum == 2) {
-				image = down2;
+			if(GravityOn == false) {
+				if(spriteNum == 1) {
+					image = down1;
+				}
+				if(spriteNum == 2) {
+					image = down2;
+				}
+				else {
+					if(spriteNum == 1) {
+						image = down1;
+					}
+				}
 			}
 			break;
 		case "left":

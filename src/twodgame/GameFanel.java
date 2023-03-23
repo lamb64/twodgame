@@ -17,14 +17,14 @@ public class GameFanel extends JPanel implements Runnable{
 	final int scale = 3; //Scale
 	
 	public final int tileSize = originalTileSize * scale; // 48x48 from a 16x16
-	public final int maxScreenCol = 16; //Horizontal 16,53
-	public final int maxScreenRow = 12; //vertical 12,29
+	public final int maxScreenCol = 53; //Horizontal 16,53
+	public final int maxScreenRow = 29; //vertical 12,29
 	public final int screenWidth = tileSize * maxScreenCol; //Width 768 pixels
 	public final int screenHeight = tileSize * maxScreenRow; //Height 576 pixels
 	
 	//World settings
 	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public final int maxWorldRow = 60;
 	public final int maxWorldWidth = tileSize * maxScreenCol;
 	public final int maxWorldHeight = tileSize * maxScreenRow;
 	public String Map = "/maps/map02.txt";
